@@ -1,0 +1,251 @@
+@keyframes background-an {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-an {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.dd-overlay {
+  z-index: 10;
+}
+
+.dd-background {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.done-dialog {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-width: 1000px;
+  max-height: 600px;
+  background-color: #1E1E1E;
+  outline-offset: 4px;
+  border-radius: 12px;
+  /* animation: dialog-an 0.1s forwards; */
+}
+
+.dd-title {
+  border-bottom: 2px solid var(--enfasis-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  margin: 0 20px;
+  h3 {
+    margin: 20px 0;
+    font-weight: 600;
+    font-size: 20px;
+  }
+  button {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 6px;
+    width: 35px;
+    height: 35px;
+    margin: 0;
+    transition: 0.2s;
+    svg {
+      height: 30px;
+      width: 30px;
+    }
+    &:hover {
+      background-color: var(--enfasis-color);
+    }
+  }
+}
+
+.dd-main {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  padding: 20px;
+  gap: 20px;
+  width: calc(100% - 40px);
+  height: 100%;
+}
+
+.dd-modlist-nomods {
+  text-align: center;
+  margin: 0;
+  color: lightgray;
+}
+
+.dd-modlist {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  border-radius: 12px;
+  height: 100%;
+  width: 100%;
+  user-select: none;
+  h4 {
+    font-weight: 500;
+    line-height: 30px;
+    font-size: 18px;
+    margin: 20px 20px 0 20px;
+    text-align: center;
+  }
+}
+
+.dd-modlist-mods {
+  overflow-x: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 10px;
+  margin: 10px;
+  margin-bottom: 20px;
+  &::-webkit-scrollbar {
+    width: 8px
+  }
+  &::-webkit-scrollbar-track {
+    background: #0e0e0e;
+    border-radius: 10px
+  }
+  &::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 10px
+  }
+}
+
+.dd-modcard {
+  flex-grow: 1;
+  background-color: #1E1E1E;
+  border-radius: 6px;
+  height: 50px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+  img {
+    border-radius: 6px;
+    height: 50px;
+    width: 50px;
+  }
+  &:hover {
+    .dd-modcard-title {
+      svg {
+        transform: rotate(90deg);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.dd-modcard-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  svg {
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+    opacity: 0;
+    transition: 0.1s;
+  }
+  p {
+    margin: 0 10px;
+  }
+}
+
+.dd-options {
+  display: flex;
+  gap: 20px;
+  min-height: 120px;
+  height: 120px;
+  width: 100%;
+}
+
+.ddo-status {
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  border-radius: 12px;
+  width: 100%;
+  h3 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 18px;
+  }
+  p {
+    margin: 0;
+    margin-bottom: 10px;
+    color: lightgray;
+  }
+}
+
+.ddo-status-pbar {
+  width: calc(100% - 40px);
+  background-color: transparent;
+  --border-radius: 6px;
+  &::-webkit-progress-bar {
+    border-radius: var(--border-radius);
+    background-color: #1E1E1E;
+  }
+  &::-webkit-progress-value {
+    border-radius: var(--border-radius);
+    background-color: var(--enfasis-color);
+  }
+}
+
+.ddo-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.ddo-button {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-radius: 12px;
+  cursor: pointer;
+  height: 100%;
+  width: 180px;
+  transition: 0.2s;
+  svg {
+    height: 50px;
+    width: 50px;
+  }
+  p {
+    font-weight: 500;
+    font-size: 18px;
+    margin: 0;
+    margin-top: 5px;
+  }
+  &:hover {
+    outline: 2px solid var(--enfasis-color);
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
