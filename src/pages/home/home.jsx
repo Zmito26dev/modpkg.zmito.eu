@@ -1,4 +1,5 @@
 import "./home.css"
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion";
 import ImportPackageInput from "../../components/import-package";
@@ -8,6 +9,10 @@ import svg from "../../assets/svg"
 
 export default function HomePage() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "MODPKG — Home";
+  }, []);
 
   return (
     <main className="home">

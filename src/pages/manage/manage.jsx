@@ -19,6 +19,10 @@ export default function ManagePage() {
   const versionRef = useRef(null)
 
   useEffect(() => {
+    document.title = "MODPKG — Manage Package";
+  }, []);
+
+  useEffect(() => {
     if (location.state) {
       const loadedJson = location.state.parsedJson
 
