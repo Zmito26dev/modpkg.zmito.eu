@@ -4,6 +4,7 @@ import ImportMrpackDialog from "./import-mrpack-dialog";
 import JSZip from "jszip";
 import convertMrpack from "../../functions/convert-mrpack";
 import "./import-mrpack.css"
+import notification from "../../functions/notification";
 
 export default function ImportMrpackInput() {
   const fileInputRef = useRef(null);
@@ -26,6 +27,11 @@ export default function ImportMrpackInput() {
     const selectedFile = e.target.files[0];
   
     if (selectedFile) {
+      if (!selectedFile.name.endsWith(".mrpack")) {
+        notification.default("The selected file is not a .mrpack file")
+        return;
+      }
+
       try {
         const zip = await JSZip.loadAsync(selectedFile);
 

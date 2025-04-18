@@ -43,11 +43,6 @@ export default function ManagePage() {
     ));
   };
 
-
-  useEffect(() => {
-    console.log(version)
-  }, [version]);
-
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('https://piston-meta.mojang.com/mc/game/version_manifest.json');
