@@ -14,7 +14,7 @@ export default function ManagePage() {
   const [selectedMods, setSelectedMods] = selectedModsState
   const [loader, setLoader] = useState("fabric");
   const [allVersions, setAllVersions] = useState([]);
-  const [version, setVersion] = useState("1.21.5");
+  const [version, setVersion] = useState("1.20.1");
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const loaderRef = useRef(null)
@@ -43,19 +43,22 @@ export default function ManagePage() {
     ));
   };
 
+
+  useEffect(() => {
+    console.log(version)
+  }, [version]);
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('https://piston-meta.mojang.com/mc/game/version_manifest.json');
       const data = await response.json();
 
       setAllVersions(data.versions);
-      setVersion(data.latest.release);
+      if (!(location.state)) {
+        setVersion(data.latest.release);
+      }
     };
 
-    fetchData();
-  }, []);
-
-  useEffect(() => {
     if (location.state) {
       const loadedJson = location.state.parsedJson
 
@@ -63,12 +66,9 @@ export default function ManagePage() {
       setVersion(loadedJson.minecraftVersion)
       setSelectedMods(loadedJson.mods.modrinth)
       loaderRef.current.value = loadedJson.loader
-
-      const newOption = document.createElement('option');
-      newOption.value = loadedJson.minecraftVersion;
-      newOption.text = "Imported: " + loadedJson.minecraftVersion;
-      versionRef.current.add(newOption);
     }
+
+    fetchData();
   }, [location]);
 
   const handleSearchChange = (event) => {
@@ -104,7 +104,7 @@ export default function ManagePage() {
               <option value="quilt">Quilt</option>
               <option value="neoforge">NeoForge</option>
             </select>
-            <select className="m-select" name="" id="" onChange={handleVersionChange} ref={versionRef}>
+            <select className="m-select" name="" id="" value={version} onChange={handleVersionChange} ref={versionRef}>
               <MinecraftVersions filterType={"release"}/>
             </select>
           </div>

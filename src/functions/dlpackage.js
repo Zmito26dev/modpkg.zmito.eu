@@ -1,11 +1,13 @@
 import JSZip from 'jszip';
 import exportPackage from './export-package';
+import notification from './notification';
 
 export default async function dlpackage(selectedMods, setDownloadedMods, version, loader) {
   const zip = new JSZip();
   const selectedModIds = selectedMods.map(mod => mod.id);
   console.log("Downloading mods:", selectedModIds);
-  
+    
+  const notFoundMods = [];
   let downloadedMods = 0;
   setDownloadedMods(0);
 
@@ -32,6 +34,7 @@ export default async function dlpackage(selectedMods, setDownloadedMods, version
         zip.file(latestFile.filename, blob);
       } else {
         console.warn(`No compatible version found for mod ${modSlug}`);
+        notFoundMods.push(modSlug);
       }
     }
 
@@ -48,5 +51,8 @@ export default async function dlpackage(selectedMods, setDownloadedMods, version
     console.error('Error downloading and zipping mods:', error);
   } finally {
     setDownloadedMods(-1);
+    if (notFoundMods.length > 0) {
+      notification.warn(`No compatible version found for the mods: ${notFoundMods.join(', ')}.`, true);
+    }
   }
 }

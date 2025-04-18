@@ -57,7 +57,7 @@ export default function ImportMrpackDialog({openDialogState, packName, modsToDow
                     <div className="md-info">
                       <h3>Selected pack:</h3>
                       <h4>{packName}</h4>
-                      <p>{modsToDownload} mods available for download</p>
+                      <p>{modsToDownload} mods/files available for download</p>
                     </div>
                     <div className="md-options">
                       <div className="mdo-status">
@@ -69,7 +69,7 @@ export default function ImportMrpackDialog({openDialogState, packName, modsToDow
                         ) : (
                           <>
                             <h3>Download status</h3>
-                            <p>Downloading {modsDownloaded} of {modsToDownload} mods</p>
+                            <p>Downloading mod/file {modsDownloaded} of {modsToDownload}.</p>
                             <progress className="ddo-status-pbar" value={modsDownloaded} max={modsToDownload}/>
                           </>
                         )}

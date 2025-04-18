@@ -1,9 +1,10 @@
 import JSZip from "jszip";
 
-export default async function convertMrpack(mods, overrides, setModsDownloaded, setOpenDialog) {
+export default async function convertMrpack(mods, overrides, packName, setModsDownloaded, setOpenDialog) {
   const zip = new JSZip();
   setModsDownloaded(0);
   let downloadedMods = 0;
+  let fileName = packName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '')
 
   try {
     for (const mod of mods) {
@@ -24,7 +25,7 @@ export default async function convertMrpack(mods, overrides, setModsDownloaded, 
 
     const a = document.createElement('a');
     a.href = blobUrl;
-    a.download = 'mods-package.zip';
+    a.download = `modpkg-${fileName}.zip`;
     document.body.appendChild(a);
     a.click();
     URL.revokeObjectURL(blobUrl);

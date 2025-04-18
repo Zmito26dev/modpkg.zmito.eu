@@ -18,7 +18,7 @@ export default function ImportMrpackInput() {
 
   const handlePackConvertion = () => {
     if (modsDownloaded === -1) {
-      convertMrpack(mods, overrides, setModsDownloaded, setOpenDialog)
+      convertMrpack(mods, overrides, packName, setModsDownloaded, setOpenDialog)
     }
   };
 
