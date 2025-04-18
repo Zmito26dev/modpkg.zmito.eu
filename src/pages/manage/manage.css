@@ -18,17 +18,6 @@
   height: 100%;
   background-color: #1E1E1E;
   overflow-x: auto;
-  &::-webkit-scrollbar {
-    width: 8px
-  }
-  &::-webkit-scrollbar-track {
-    background: #0e0e0e;
-    border-radius: 10px
-  }
-  &::-webkit-scrollbar-thumb {
-    background: white;
-    border-radius: 10px
-  }
 }
 
 .m-logo {
@@ -75,12 +64,44 @@
 .m-search-input {
   outline: 0;
   border: 0;
+  margin-bottom: 10px;
   width: 100%;
   height: 46px;
   border-radius: 6px;
   background-color: black;
   font-size: 20px;
   padding: 0 10px;
+}
+
+.m-page-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 46px;
+  border-radius: 6px;
+  background-color: black;
+  overflow: hidden;
+  p {
+    margin: 0 0 0 10px;
+    font-size: 20px;
+  }
+  button {
+    border: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    line-height: 20px;
+    height: 100%;
+    aspect-ratio: 1/1;
+    background-color: transparent;
+    svg {
+      width: 36px;
+      height: 36px;
+    }
+  }
 }
 
 .m-done {
@@ -106,5 +127,39 @@
     transition: 0.2s;
     outline: 2px solid transparent;
     outline-offset: 0;
+  }
+}
+
+@media (max-width: 1139px) {
+  .manage {
+    height: unset;
+    flex-direction: column;
+    padding: 10px;
+  }
+  .m-logo {
+    margin: 30px 0;
+  }
+  .m-modlist {
+    border-radius: 12px;
+    width: 100%;
+    height: none;
+    border: 10px;
+  }
+  .m-main {
+    width: 100%;
+    height: unset;
+    padding: 0 0 20px 0;
+    margin: 0 0 20px 0;
+    border-bottom: 4px solid #1E1E1E;
+  }
+  .m-main-group, .m-done {
+    width: calc(100% - 20px);
+  }
+  .m-done {
+    width: 100%;
+    position: unset;
+    bottom: unset;
+    right: unset;
+    margin: unset;
   }
 }

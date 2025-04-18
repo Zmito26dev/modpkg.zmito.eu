@@ -23,3 +23,33 @@ button, input, select, label {
 button {
   cursor: pointer;
 }
+
+:root, .m-modlist {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #0e0e0e;
+    border-radius: 10px
+  }
+  &::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 10px
+  }
+  &::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    zoom: 0.9;
+  }
+}
+
+@media (max-width: 430px) {
+  :root {
+    zoom: 0.8;
+  }
+}

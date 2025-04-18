@@ -4,7 +4,7 @@ import "./modlist.css"
 import svg from "../../assets/svg";
 import dlmod from "../../functions/dlmod";
 
-export default function Modlist({selectedModsState, loader, version, search}) {
+export default function Modlist({selectedModsState, loader, version, search, page}) {
   const [mods, setMods] = useState([])
   const [selectedMods, setSelectedMods] = selectedModsState
 
@@ -20,7 +20,8 @@ export default function Modlist({selectedModsState, loader, version, search}) {
         const response = await fetch('https://api.modrinth.com/v2/search?' + new URLSearchParams({
           query: search,
           facets: JSON.stringify(facets),
-          limit: 50
+          limit: 50,
+          offset: (page-1)*50
         }));
         const data = await response.json();
         setMods(data.hits);
@@ -31,7 +32,7 @@ export default function Modlist({selectedModsState, loader, version, search}) {
     };
 
     fetchMods();
-  }, [search, version, loader]);
+  }, [search, version, loader, page]);
 
   const handleSelect = (mod) => {
     setSelectedMods(prevSelectedMods => {

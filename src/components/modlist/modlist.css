@@ -19,6 +19,12 @@
   /* opacity: 0; */
 }
 
+@media (max-width: 647px) {
+  .modcard {
+    min-width: 430px;
+  }
+}
+
 .mc-main {
   margin: 10px;
   display: flex;

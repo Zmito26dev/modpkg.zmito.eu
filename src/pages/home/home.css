@@ -30,6 +30,7 @@
 }
 
 .h-option {
+  all: unset;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -97,5 +98,31 @@
   transform: scale(1.05);
   svg g path{
     fill: #D0FF00;
+  }
+}
+
+@media (max-width: 1139px) {
+  .h-mainmenu {
+    flex-direction: column;
+    width: calc(100% - 40px);
+  }
+  .h-logo {
+    margin-bottom: unset;
+    margin: 40px 0;
+  }
+  .h-options {
+    height: unset;
+    width: 100%;
+  }
+  .h-option {
+    padding: 20px;
+    height: 140px;
+  }
+  .createdbyz {
+    margin-top: 60px;
+    margin-bottom: 40px;
+    position: unset;
+    bottom: unset;
+    right: unset;
   }
 }

@@ -2,7 +2,7 @@ import "./manage.css"
 import { useState, useEffect, useRef } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { motion } from "framer-motion"
-import { MinecraftVersions } from "../../functions/ms-versions"
+import svg from "../../assets/svg"
 import ManageDialog from "../../components/manage-dialog/manage-dialog"
 import Modlist from "../../components/modlist/modlist"
 import logo from "/logobanner.svg"
@@ -13,13 +13,46 @@ export default function ManagePage() {
   const selectedModsState = useState([])
   const [selectedMods, setSelectedMods] = selectedModsState
   const [loader, setLoader] = useState("fabric");
-  const [version, setVersion] = useState("1.21.4");
+  const [allVersions, setAllVersions] = useState([]);
+  const [version, setVersion] = useState("1.21.5");
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
   const loaderRef = useRef(null)
   const versionRef = useRef(null)
 
   useEffect(() => {
     document.title = "MODPKG — Manage Package";
+  }, []);
+
+  function MinecraftVersions({ filterType }) {
+    const filteredVersions = allVersions.filter(version => {
+      if (filterType === 'release') {
+        return version.type === 'release';
+      } else if (filterType === 'snapshot') {
+        return version.type === 'snapshot';
+      }
+      return true; // Default to all if no filter
+    });
+
+    const versionIds = filteredVersions.map(version => version.id);
+
+    return versionIds.map(version => (
+      <option key={version} value={version}>
+        {version}
+      </option>
+    ));
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('https://piston-meta.mojang.com/mc/game/version_manifest.json');
+      const data = await response.json();
+
+      setAllVersions(data.versions);
+      setVersion(data.latest.release);
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -79,11 +112,16 @@ export default function ManagePage() {
         <div className="m-main-group">
           <h3>Search & Filters</h3>
           <input className="m-search-input" type="search" placeholder="Search mods" onChange={handleSearchChange}/>
+          <div className="m-page-selector">
+            <button onClick={() => {if (page > 1) {setPage(page - 1)}}}>{svg.pageLeft}</button>
+            <p>Page: {page}</p>
+            <button onClick={() => setPage(page + 1)}>{svg.pageRight}</button>
+          </div>
         </div>
         <ManageDialog selectedModsState={selectedModsState} loader={loader} version={version} />
       </div>
       <div className="m-modlist">
-        <Modlist selectedModsState={selectedModsState} loader={loader} version={version} search={search}/>
+        <Modlist selectedModsState={selectedModsState} loader={loader} version={version} search={search} page={page}/>
       </div>
     </main>
   )
